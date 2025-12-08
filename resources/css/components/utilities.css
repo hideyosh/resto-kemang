@@ -1,0 +1,26 @@
+/**
+ * Global Utilities
+ */
+.notification {
+    @apply fixed top-20 right-6 bg-yellow-400 text-black px-6 py-3 rounded-lg shadow-lg animate-pulse;
+}
+
+.btn-primary {
+    @apply bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 rounded-lg transition;
+}
+
+.btn-secondary {
+    @apply bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 rounded-lg transition;
+}
+
+.form-input {
+    @apply w-full bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500;
+}
+
+.card {
+    @apply bg-gray-800 p-6 rounded-lg shadow-lg;
+}
+
+.badge {
+    @apply inline-block bg-yellow-500 text-black px-3 py-1 rounded-full text-xs font-bold;
+}

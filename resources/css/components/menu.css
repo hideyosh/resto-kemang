@@ -1,0 +1,30 @@
+/**
+ * Menu Page Styles
+ */
+.filter-button {
+    @apply px-6 py-2 rounded-lg font-bold transition;
+}
+
+.menu-item {
+    @apply bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition;
+}
+
+.menu-item img {
+    @apply w-full h-full object-cover;
+}
+
+#cartSidebar {
+    @apply fixed right-0 top-0 h-full w-80 bg-gray-900 shadow-lg transform transition-transform duration-300 z-50 overflow-y-auto;
+}
+
+#cartSidebar.translate-x-full {
+    @apply translate-x-full;
+}
+
+.cart-item {
+    @apply bg-gray-800 p-4 rounded-lg mb-3 flex justify-between items-start;
+}
+
+.cart-quantity-btn {
+    @apply bg-gray-700 px-2 py-1 rounded hover:bg-gray-600 transition;
+}
