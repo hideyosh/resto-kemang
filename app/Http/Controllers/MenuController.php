@@ -25,7 +25,7 @@ class MenuController extends Controller
     // GET - Tampilkan form create menu
     public function create()
     {
-        return view('menu.create');
+        return view('admin.menu.create');
     }
 
     // GET - API semua menu
@@ -185,6 +185,6 @@ class MenuController extends Controller
     // GET - Tampilkan form edit menu (web)
     public function edit(MenuItem $menu)
     {
-        return view('menu.edit', ['menu' => $menu]);
+        return view('admin.menu.edit', ['menu' => $menu]);
     }
 }

@@ -19,6 +19,15 @@ class OrderController extends Controller
     }
 
     // ============================================
+    // Tampilkan order milik user yang sedang login
+    // ============================================
+    public function userIndex()
+    {
+        $orders = Order::where('user_id', auth()->id())->latest()->paginate(15);
+        return view('order.index', compact('orders'));
+    }
+
+    // ============================================
     // Buat order baru
     // ============================================
     public function store(Request $request)
@@ -90,7 +99,30 @@ class OrderController extends Controller
     {
         // Cari order berdasarkan ID
         $order = Order::findOrFail($id);
+
+        // Jika bukan admin, pastikan hanya pemilik yang dapat melihat
+        if (!auth()->check() || auth()->user()->role !== 'admin') {
+            if ($order->user_id !== auth()->id()) {
+                abort(403, 'Anda tidak memiliki akses untuk melihat order ini');
+            }
+        }
+
         return response()->json($order);
+    }
+
+    // ============================================
+    // Tampilkan detail order milik user (user flow)
+    // ============================================
+    public function userShow($id)
+    {
+        $order = Order::find($id);
+        if (!$order) {
+            abort(404);
+        }
+        if ($order->user_id !== auth()->id()) {
+            abort(403, 'Anda tidak memiliki akses untuk melihat order ini');
+        }
+        return view('order.show', compact('order'));
     }
 
     // ============================================

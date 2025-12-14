@@ -38,11 +38,21 @@ Route::middleware(['auth', 'user'])->group(function () {
     })->name('order.create');
     Route::post('/api/orders', [OrderController::class, 'store'])->name('order.store');
 
+    // User: lihat daftar order milik sendiri
+    Route::get('/orders', [OrderController::class, 'userIndex'])->name('orders.index');
+    // User: lihat detail order milik sendiri
+    Route::get('/orders/{order}', [OrderController::class, 'userShow'])->name('orders.show');
+
     // Reservation routes
     Route::get('/reservation', function () {
         return view('reservation.create');
     })->name('reservation.create');
     Route::post('/api/reservations', [ReservationController::class, 'store'])->name('reservation.store');
+
+    // User: lihat daftar reservasi milik sendiri
+    Route::get('/reservations', [ReservationController::class, 'userIndex'])->name('reservations.index');
+    // User: lihat detail reservasi milik sendiri
+    Route::get('/reservations/{reservation}', [ReservationController::class, 'userShow'])->name('reservations.show');
 });
 
 // ============================================

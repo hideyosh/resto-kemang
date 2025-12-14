@@ -18,6 +18,15 @@ class ReservationController extends Controller
     }
 
     // ============================================
+    // Tampilkan reservasi milik user yang sedang login
+    // ============================================
+    public function userIndex()
+    {
+        $reservations = TableReservation::where('user_id', auth()->id())->latest()->paginate(15);
+        return view('reservation.index', compact('reservations'));
+    }
+
+    // ============================================
     // Buat reservasi baru
     // ============================================
     public function store(Request $request)
@@ -55,7 +64,30 @@ class ReservationController extends Controller
     {
         // Cari reservasi berdasarkan ID
         $reservation = TableReservation::findOrFail($id);
+
+        // Jika bukan admin, pastikan hanya pemilik yang dapat melihat
+        if (!auth()->check() || auth()->user()->role !== 'admin') {
+            if ($reservation->user_id !== auth()->id()) {
+                abort(403, 'Anda tidak memiliki akses untuk melihat reservasi ini');
+            }
+        }
+
         return response()->json($reservation);
+    }
+
+    // ============================================
+    // Tampilkan detail reservasi milik user (user flow)
+    // ============================================
+    public function userShow($id)
+    {
+        $reservation = TableReservation::find($id);
+        if (!$reservation) {
+            abort(404);
+        }
+        if ($reservation->user_id !== auth()->id()) {
+            abort(403, 'Anda tidak memiliki akses untuk melihat reservasi ini');
+        }
+        return view('reservation.show', compact('reservation'));
     }
 
     // ============================================

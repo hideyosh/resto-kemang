@@ -21,8 +21,8 @@ class IsUser
             return redirect('/login');
         }
 
-        // Cek apakah role user adalah 'user' (bukan admin)
-        if (auth()->user()->role !== 'user') {
+        // Cek apakah role user adalah 'customer' (bukan admin)
+        if (auth()->user()->role !== 'customer') {
             // Jika bukan user biasa, kembalikan error 403
             abort(403, 'Anda tidak memiliki akses untuk halaman ini');
         }
