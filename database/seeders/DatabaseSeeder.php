@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             'name'     => 'Test User',
             'email'    => 'user@restokemang.com',
             'password' => Hash::make('User@123456'),
-            'role'     => 'user',
+            'role'     => 'customer',
         ]);
 
         // Jalankan seeder lainnya

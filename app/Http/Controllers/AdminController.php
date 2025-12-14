@@ -16,7 +16,7 @@ class AdminController extends Controller
     public function dashboard()
     {
         // Hitung total user
-        $totalUsers = User::where('role', 'user')->count();
+        $totalUsers = User::where('role', 'customer')->count();
 
         // Hitung total order
         $totalOrders = Order::count();
@@ -44,7 +44,7 @@ class AdminController extends Controller
     public function userIndex()
     {
         // Ambil semua user dengan role 'user'
-        $users = User::where('role', 'user')->paginate(10);
+        $users = User::where('role', 'customer')->paginate(10);
 
         return view('admin.users.index', [
             'users' => $users,

@@ -31,7 +31,7 @@ Route::get('/menu/filter/{category}', [MenuController::class, 'filterByCategory'
 // USER ROUTES - Hanya untuk authenticated users
 // ============================================
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'user'])->group(function () {
     // Order routes
     Route::get('/order/create', function () {
         return view('order.create');

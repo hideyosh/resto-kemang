@@ -34,10 +34,10 @@
                 <!-- Name Field -->
                 <div>
                     <label for="name" class="block text-sm font-bold mb-2">Nama Lengkap</label>
-                    <input 
-                        type="text" 
-                        name="name" 
-                        id="name" 
+                    <input
+                        type="text"
+                        name="name"
+                        id="name"
                         value="{{ old('name', $user->name) }}"
                         class="w-full px-4 py-2 border-2 border-gray-300 rounded focus:outline-none focus:border-blue-500 @error('name') border-red-500 @enderror"
                         placeholder="Masukkan nama lengkap"
@@ -51,10 +51,10 @@
                 <!-- Email Field -->
                 <div>
                     <label for="email" class="block text-sm font-bold mb-2">Email</label>
-                    <input 
-                        type="email" 
-                        name="email" 
-                        id="email" 
+                    <input
+                        type="email"
+                        name="email"
+                        id="email"
                         value="{{ old('email', $user->email) }}"
                         class="w-full px-4 py-2 border-2 border-gray-300 rounded focus:outline-none focus:border-blue-500 @error('email') border-red-500 @enderror"
                         placeholder="Masukkan email"
@@ -68,10 +68,10 @@
                 <!-- Password Field (Opsional) -->
                 <div>
                     <label for="password" class="block text-sm font-bold mb-2">Password Baru (Kosongkan jika tidak ingin mengubah)</label>
-                    <input 
-                        type="password" 
-                        name="password" 
-                        id="password" 
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
                         class="w-full px-4 py-2 border-2 border-gray-300 rounded focus:outline-none focus:border-blue-500 @error('password') border-red-500 @enderror"
                         placeholder="Masukkan password baru (minimal 8 karakter)"
                     >
@@ -83,10 +83,10 @@
                 <!-- Password Confirmation Field -->
                 <div>
                     <label for="password_confirmation" class="block text-sm font-bold mb-2">Konfirmasi Password</label>
-                    <input 
-                        type="password" 
-                        name="password_confirmation" 
-                        id="password_confirmation" 
+                    <input
+                        type="password"
+                        name="password_confirmation"
+                        id="password_confirmation"
                         class="w-full px-4 py-2 border-2 border-gray-300 rounded focus:outline-none focus:border-blue-500"
                         placeholder="Konfirmasi password baru"
                     >

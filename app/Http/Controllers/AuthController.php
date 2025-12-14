@@ -45,8 +45,16 @@ class AuthController extends Controller
         if (Auth::attempt($validated, $request->boolean('remember'))) {
             $request->session()->regenerate();
 
+            $user = Auth::user();
+
+            // Redirect berdasarkan role
+            if ($user->role === 'admin') {
+                return redirect()->intended('/admin/dashboard')
+                    ->with('success', 'Welcome back, Admin ' . $user->name . '!');
+            }
+
             return redirect()->intended('/')
-                ->with('success', 'Welcome back, ' . Auth::user()->name . '!');
+                ->with('success', 'Welcome back, ' . $user->name . '!');
         }
 
         return back()
@@ -55,6 +63,7 @@ class AuthController extends Controller
                 'email' => 'The provided credentials do not match our records.',
             ]);
     }
+
 
     /**
      * Handle register
