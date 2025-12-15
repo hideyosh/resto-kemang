@@ -116,7 +116,8 @@
 
 @section('scripts')
 <script>
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
+const CART_STORAGE_KEY = 'resto_cart';
+let cart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY)) || [];
 
 function addToCart(button) {
     const name = button.getAttribute('data-name');
@@ -131,7 +132,7 @@ function addToCart(button) {
         cart.push({ name, price, image, quantity: 1 });
     }
 
-    localStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
     renderCartItems();
 
     Swal.fire({
@@ -148,13 +149,16 @@ function renderCartItems() {
     const cartTotalEl = document.getElementById('cartTotal');
     if (!cartItemsDiv || !cartTotalEl) return; // nothing to render for guests
 
+    // Always read current cart from storage to avoid stale state
+    const currentCart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY)) || [];
+
     cartItemsDiv.innerHTML = '';
     let total = 0;
 
-    if (cart.length === 0) {
+    if (currentCart.length === 0) {
         cartItemsDiv.innerHTML = '<p class="text-gray-400">Your cart is empty</p>';
     } else {
-        cart.forEach((item, index) => {
+        currentCart.forEach((item, index) => {
             const itemTotal = item.price * item.quantity;
             total += itemTotal;
 
@@ -179,25 +183,32 @@ function renderCartItems() {
 }
 
 function removeFromCart(index) {
-    cart.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(cart));
+    const currentCart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY)) || [];
+    currentCart.splice(index, 1);
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(currentCart));
     renderCartItems();
 }
 
 function incrementQuantity(index) {
-    cart[index].quantity += 1;
-    localStorage.setItem('cart', JSON.stringify(cart));
-    renderCartItems();
+    const currentCart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY)) || [];
+    if (currentCart[index]) {
+        currentCart[index].quantity += 1;
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(currentCart));
+        renderCartItems();
+    }
 }
 
 function decrementQuantity(index) {
-    if (cart[index].quantity > 1) {
-        cart[index].quantity -= 1;
-    } else {
-        removeFromCart(index);
+    const currentCart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY)) || [];
+    if (currentCart[index]) {
+        if (currentCart[index].quantity > 1) {
+            currentCart[index].quantity -= 1;
+        } else {
+            currentCart.splice(index, 1);
+        }
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(currentCart));
+        renderCartItems();
     }
-    localStorage.setItem('cart', JSON.stringify(cart));
-    renderCartItems();
 }
 
 const filterButtons = document.querySelectorAll('.filter-button');
@@ -252,15 +263,7 @@ if (closeCartButton && toggleCartButton && cartSidebar) {
     });
 }
 
-if (checkoutButton) {
-    checkoutButton.addEventListener('click', () => {
-        if (cart.length === 0) {
-            Swal.fire('Cart is empty', 'Please add items to cart', 'warning');
-            return;
-        }
-        window.location.href = '/order/create';
-    });
-}
+// Checkout handled in modules/menu.js to ensure single canonical handler
 
 // Initial render only if cart UI exists
 if (document.getElementById('cartItems')) {

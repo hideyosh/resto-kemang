@@ -74,49 +74,5 @@
 @endsection
 
 @section('scripts')
-<script>
-document.getElementById('reservationForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.target);
-    const data = {
-        number_of_guests: parseInt(formData.get('number_of_guests')),
-        reservation_date: formData.get('reservation_date'),
-        notes: formData.get('notes'),
-        _token: document.querySelector('[name="_token"]').value
-    };
-
-    try {
-        const response = await fetch('/api/reservations', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Reservation Confirmed!',
-                text: 'Your table has been reserved. Reservation ID: ' + result.reservation.id,
-                confirmButtonColor: '#FBBF24'
-            }).then(() => {
-                window.location.href = '/menu';
-            });
-        } else {
-            Swal.fire('Error', result.message || 'Failed to make reservation', 'error');
-        }
-    } catch (error) {
-        Swal.fire('Error', 'Something went wrong', 'error');
-    }
-});
-
-// Set minimum date to today
-const dateInput = document.querySelector('input[name="reservation_date"]');
-const today = new Date().toISOString().slice(0, 16);
-dateInput.min = today;
-</script>
+<!-- Reservation page scripts are handled by resources/js/modules/reservation.js -->
 @endsection

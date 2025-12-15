@@ -3,12 +3,13 @@
  */
 
 // Cart data stored in localStorage
-const CART_STORAGE_KEY = 'resto_cart';
+var CART_STORAGE_KEY = 'resto_cart';
 
 /**
  * Initialize menu page
  */
 export function initMenu() {
+    // initialize page
     setupFilterButtons();
     setupCartToggle();
     loadCartFromStorage();
@@ -18,73 +19,86 @@ export function initMenu() {
  * Setup filter buttons for menu categories
  */
 function setupFilterButtons() {
-    const filterButtons = document.querySelectorAll('.filter-button');
-    const menuItems = document.querySelectorAll('.menu-item');
+    var filterButtons = document.querySelectorAll('.filter-button');
+    var menuItems = document.querySelectorAll('.menu-item');
 
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const filter = button.dataset.filter;
+    for (var i = 0; i < filterButtons.length; i++) {
+        (function (button) {
+            button.addEventListener('click', function () {
+                var filter = button.getAttribute('data-filter');
 
-            // Update active button
-            filterButtons.forEach(btn => {
-                btn.classList.remove('bg-yellow-500', 'text-black');
-                btn.classList.add('bg-gray-700', 'text-white');
-            });
-            button.classList.add('bg-yellow-500', 'text-black');
-            button.classList.remove('bg-gray-700', 'text-white');
+                // Update active button - simple loop
+                for (var j = 0; j < filterButtons.length; j++) {
+                    filterButtons[j].classList.remove('bg-yellow-500');
+                    filterButtons[j].classList.add('bg-gray-700');
+                }
+                button.classList.add('bg-yellow-500');
+                button.classList.remove('bg-gray-700');
 
-            // Filter menu items
-            menuItems.forEach(item => {
-                if (filter === 'all' || item.dataset.category === filter) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
+                // Show/hide menu items
+                for (var k = 0; k < menuItems.length; k++) {
+                    var item = menuItems[k];
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
                 }
             });
-        });
-    });
+        })(filterButtons[i]);
+    }
 }
 
 /**
  * Add item to cart
  */
-window.addToCart = function(button) {
-    const name = button.dataset.name;
-    const price = parseInt(button.dataset.price);
-    const image = button.dataset.image;
+window.addToCart = function (button) {
+    var name = button.getAttribute('data-name');
+    var price = parseInt(button.getAttribute('data-price'), 10);
+    var image = button.getAttribute('data-image');
 
-    const cart = getCart();
-    const existingItem = cart.find(item => item.name === name);
-
-    if (existingItem) {
-        existingItem.quantity++;
-    } else {
-        cart.push({ name, price, image, quantity: 1 });
+    var cart = getCart();
+    var found = false;
+    for (var i = 0; i < cart.length; i++) {
+        if (cart[i].name === name) {
+            cart[i].quantity = cart[i].quantity + 1;
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        cart.push({ name: name, price: price, image: image, quantity: 1 });
     }
 
     saveCart(cart);
     renderCart();
-    showNotification(`${name} added to cart!`);
+    toast(name + ' added to cart!', 'success');
 };
 
 /**
  * Setup cart sidebar toggle
  */
 function setupCartToggle() {
-    const cartButton = document.querySelector('[data-cart-toggle]');
-    const closeCartButton = document.getElementById('closeCartButton');
-    const cartSidebar = document.getElementById('cartSidebar');
+    var cartButton = document.querySelector('[data-cart-toggle]');
+    var closeCartButton = document.getElementById('closeCartButton');
+    var cartSidebar = document.getElementById('cartSidebar');
 
     if (closeCartButton && cartSidebar) {
-        closeCartButton.addEventListener('click', () => {
+        closeCartButton.addEventListener('click', function () {
             cartSidebar.classList.add('translate-x-full');
         });
     }
 
-    // Checkout button
-    const checkoutButton = document.getElementById('checkoutButton');
+    var checkoutButton = document.getElementById('checkoutButton');
     if (checkoutButton) {
-        checkoutButton.addEventListener('click', () => {
+        checkoutButton.addEventListener('click', function (e) {
+            var cart = getCart();
+            if (!cart || cart.length === 0) {
+                toast('Please add items to cart', 'warning');
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                return;
+            }
             window.location.href = '/order/create';
         });
     }
@@ -94,8 +108,11 @@ function setupCartToggle() {
  * Get cart from localStorage
  */
 function getCart() {
-    const cart = localStorage.getItem(CART_STORAGE_KEY);
-    return cart ? JSON.parse(cart) : [];
+    var cart = localStorage.getItem(CART_STORAGE_KEY);
+    if (cart) {
+        return JSON.parse(cart);
+    }
+    return [];
 }
 
 /**
@@ -116,37 +133,33 @@ function loadCartFromStorage() {
  * Render cart items
  */
 function renderCart() {
-    const cart = getCart();
-    const cartItems = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
-
+    var cart = getCart();
+    var cartItems = document.getElementById('cartItems');
+    var cartTotal = document.getElementById('cartTotal');
     if (!cartItems || !cartTotal) return;
 
     cartItems.innerHTML = '';
-    let total = 0;
+    var total = 0;
 
-    cart.forEach((item, index) => {
-        const itemTotal = item.price * item.quantity;
+    for (var i = 0; i < cart.length; i++) {
+        var item = cart[i];
+        var itemTotal = item.price * item.quantity;
         total += itemTotal;
 
-        const cartItem = document.createElement('div');
+        var cartItem = document.createElement('div');
         cartItem.className = 'bg-gray-800 p-4 rounded-lg mb-3 flex justify-between items-start';
-        cartItem.innerHTML = `
-            <div class="flex-1">
-                <h4 class="font-bold">${item.name}</h4>
-                <p class="text-yellow-400">Rp ${item.price.toLocaleString('id-ID')}</p>
-                <div class="flex items-center gap-2 mt-2">
-                    <button onclick="decrementQuantity(${index})" class="bg-gray-700 px-2 py-1 rounded">−</button>
-                    <span class="text-sm">${item.quantity}x</span>
-                    <button onclick="incrementQuantity(${index})" class="bg-gray-700 px-2 py-1 rounded">+</button>
-                </div>
-            </div>
-            <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-600">✕</button>
-        `;
+        cartItem.innerHTML = '<div class="flex-1"><h4 class="font-bold">' + item.name + '</h4>' +
+            '<p class="text-yellow-400">Rp ' + item.price.toLocaleString('id-ID') + '</p>' +
+            '<div class="flex items-center gap-2 mt-2">' +
+            '<button onclick="decrementQuantity(' + i + ')" class="bg-gray-700 px-2 py-1 rounded">−</button>' +
+            '<span class="text-sm">' + item.quantity + 'x</span>' +
+            '<button onclick="incrementQuantity(' + i + ')" class="bg-gray-700 px-2 py-1 rounded">+</button>' +
+            '</div></div>' +
+            '<button onclick="removeFromCart(' + i + ')" class="text-red-400 hover:text-red-600">✕</button>';
         cartItems.appendChild(cartItem);
-    });
+    }
 
-    cartTotal.textContent = `Rp ${total.toLocaleString('id-ID')}`;
+    cartTotal.textContent = 'Rp ' + total.toLocaleString('id-ID');
 }
 
 /**
@@ -186,13 +199,15 @@ window.decrementQuantity = function(index) {
 /**
  * Show notification
  */
-function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.className = 'fixed top-20 right-6 bg-yellow-400 text-black px-6 py-3 rounded-lg shadow-lg animate-pulse';
+function toast(message, type) {
+    // simple toast: type can be 'success','warning','error'
+    var notification = document.createElement('div');
+    var cls = 'bg-gray-200 text-black';
+    if (type === 'success') cls = 'bg-green-500 text-white';
+    if (type === 'warning') cls = 'bg-yellow-400 text-black';
+    if (type === 'error') cls = 'bg-red-500 text-white';
+    notification.className = 'fixed top-20 right-6 px-6 py-3 rounded-lg shadow-lg ' + cls;
     notification.textContent = message;
-
     document.body.appendChild(notification);
-    setTimeout(() => {
-        notification.remove();
-    }, 2000);
+    window.setTimeout(function () { notification.remove(); }, 2000);
 }

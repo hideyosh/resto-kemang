@@ -6,6 +6,14 @@ export function initReservation() {
     if (form) {
         form.addEventListener('submit', handleReservationSubmit);
     }
+
+    // Set minimum date to now (no past reservation)
+    const dateInput = document.querySelector('input[name="reservation_date"]');
+    if (dateInput) {
+        const now = new Date();
+        const iso = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0,16);
+        dateInput.min = iso;
+    }
 }
 
 /**
@@ -14,26 +22,29 @@ export function initReservation() {
 async function handleReservationSubmit(e) {
     e.preventDefault();
 
+    // prevent double submit via flag and disable submit button
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    if (submitBtn?.dataset.submitting === '1') return;
+    if (submitBtn) {
+        submitBtn.dataset.submitting = '1';
+        submitBtn.disabled = true;
+        submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+    }
+
     const form = e.target;
     const numberOfGuests = form.number_of_guests.value;
     const reservationDate = form.reservation_date.value;
 
     // Basic validation for required reservation fields
     if (!numberOfGuests || numberOfGuests < 1 || numberOfGuests > 20) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'Validation Error',
-            text: 'Number of guests must be between 1 and 20.',
-        });
+        showToast('Number of guests must be between 1 and 20.', 'warning');
+        resetSubmitBtn();
         return;
     }
 
     if (!reservationDate) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'Validation Error',
-            text: 'Please select a date and time for your reservation.',
-        });
+        showToast('Please select a date and time for your reservation.', 'warning');
+        resetSubmitBtn();
         return;
     }
 
@@ -79,30 +90,51 @@ async function handleReservationSubmit(e) {
                 console.error('Failed to parse error response:', parseError);
             }
 
-            Swal.fire({
-                icon: 'error',
-                title: 'Reservation Failed',
-                text: errorMessage,
-            });
+            showToast(errorMessage, 'error');
             return;
         }
 
         const responseData = JSON.parse(responseText);
 
-        Swal.fire({
-            icon: 'success',
-            title: 'Reservation Confirmed!',
-            text: 'Your table reservation has been booked successfully.',
-        }).then(() => {
-            form.reset();
-            window.location.href = '/';
-        });
+        showToast('Reservation confirmed!', 'success');
+        form.reset();
+        window.location.href = '/';
     } catch (error) {
         console.error('Error:', error);
-        Swal.fire({
-            icon: 'error',
-            title: 'Connection Error',
-            text: error.message || 'Failed to connect to the server. Please try again.',
-        });
+        showToast(error.message || 'Failed to connect to the server. Please try again.', 'error');
     }
+    finally {
+        resetSubmitBtn();
+    }
+}
+
+function resetSubmitBtn() {
+    const form = document.getElementById('reservationForm');
+    const submitBtn = form?.querySelector('button[type="submit"]');
+    if (submitBtn) {
+        submitBtn.dataset.submitting = '0';
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+    }
+}
+
+function showToast(message, type = 'info') {
+    // Re-use SweetAlert if available for nicer toast, otherwise fallback to simple DOM toast
+    if (window.Swal && Swal.fire) {
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: type,
+            title: message,
+            showConfirmButton: false,
+            timer: 2000,
+        });
+        return;
+    }
+
+    const notification = document.createElement('div');
+    notification.className = `fixed top-20 right-6 px-6 py-3 rounded-lg shadow-lg ${type === 'success' ? 'bg-green-500 text-white' : type === 'warning' ? 'bg-yellow-400 text-black' : 'bg-red-500 text-white'}`;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    setTimeout(() => notification.remove(), 2500);
 }

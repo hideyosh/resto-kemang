@@ -56,13 +56,23 @@ function setupOrderForm() {
 async function handleOrderSubmit(e) {
     e.preventDefault();
 
+    // prevent double submit via flag and disable submit button
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    if (submitBtn?.dataset.submitting === '1') return;
+    if (submitBtn) {
+        submitBtn.dataset.submitting = '1';
+        submitBtn.disabled = true;
+        submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+    }
+
     const cart = getCartFromStorage();
     if (cart.length === 0) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'Empty Cart',
-            text: 'Please add items to your cart first.',
-        });
+        showToast('Please add items to your cart first.', 'warning');
+        if (submitBtn) {
+            submitBtn.dataset.submitting = '0';
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
         return;
     }
 
@@ -134,31 +144,24 @@ async function handleOrderSubmit(e) {
                 errorMessage = errors;
             }
 
-            Swal.fire({
-                icon: 'error',
-                title: 'Order Failed',
-                text: errorMessage,
-            });
+            showToast(errorMessage, 'error');
             return;
         }
 
         if (response.status === 201 || response.status === 200) {
             localStorage.removeItem('resto_cart');
-            Swal.fire({
-                icon: 'success',
-                title: 'Order Confirmed!',
-                text: 'Your order has been placed successfully.',
-            }).then(() => {
-                window.location.href = '/menu';
-            });
+            showToast('Your order has been placed successfully.', 'success');
+            window.location.href = '/menu';
         }
     } catch (error) {
         console.error('Network error:', error);
-        Swal.fire({
-            icon: 'error',
-            title: 'Connection Error',
-            text: error.message || 'Failed to connect to the server. Please try again.',
-        });
+        showToast(error.message || 'Failed to connect to the server. Please try again.', 'error');
+    } finally {
+        if (submitBtn) {
+            submitBtn.dataset.submitting = '0';
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
     }
 }
 
@@ -175,4 +178,24 @@ function getCartFromStorage() {
  */
 function calculateTotal(cart) {
     return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+}
+
+function showToast(message, type = 'info') {
+    if (window.Swal && Swal.fire) {
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: type,
+            title: message,
+            showConfirmButton: false,
+            timer: 2000,
+        });
+        return;
+    }
+
+    const notification = document.createElement('div');
+    notification.className = `fixed top-20 right-6 px-6 py-3 rounded-lg shadow-lg ${type === 'success' ? 'bg-green-500 text-white' : type === 'warning' ? 'bg-yellow-400 text-black' : 'bg-red-500 text-white'}`;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    setTimeout(() => notification.remove(), 2500);
 }

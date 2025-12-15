@@ -19,16 +19,16 @@ class DatabaseSeeder extends Seeder
         // Buat akun admin
         User::create([
             'name'     => 'Admin Resto Kemang',
-            'email'    => 'admin@restokemang.com',
-            'password' => Hash::make('Admin@123456'),
+            'email'    => 'admin@example.com',
+            'password' => Hash::make('password'),
             'role'     => 'admin',
         ]);
 
         // Buat akun user untuk testing
         User::create([
             'name'     => 'Test User',
-            'email'    => 'user@restokemang.com',
-            'password' => Hash::make('User@123456'),
+            'email'    => 'user@example.com',
+            'password' => Hash::make('password'),
             'role'     => 'customer',
         ]);
 
