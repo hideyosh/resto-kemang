@@ -13,45 +13,49 @@ Website restoran **Resto Kemang** yang telah dikonversi menjadi aplikasi Laravel
 -  Database SQLite
 -  Interface responsif dengan Tailwind CSS
 
-##  Setup & Installation
+## 🛠 Setup & Installation
 
 ### Prerequisites
 - PHP >= 8.2
 - Composer
-- Node.js & NPM (opsional, untuk build frontend)
+- Node.js & NPM
 
 ### Instalasi
 
-1. **Clone atau akses proyek:**
-\\\ash
-cd c:\Users\sudar\Downloads\resto-kemang-laravel
-\\\
+1. **Clone repository:**
+   ```bash
+   git clone https://github.com/hideyosh/resto-kemang.git
+   cd resto-kemang
+   ```
 
-2. **Install dependencies:**
-\\\ash
-composer install
-\\\
+2. **Install dependensi:**
+   ```bash
+   composer install
+   npm install && npm run build
+   ```
 
 3. **Setup environment file:**
-\\\ash
-copy .env.example .env
-php artisan key:generate
-\\\
+   ```bash
+   copy .env.example .env
+   php artisan key:generate
+   ```
 
-4. **Jalankan migrations:**
-\\\ash
-php artisan migrate
-\\\
+4. **Setup Database:**
+   Pastikan file database sqlite tersedia.
+   ```bash
+   copy nul database\database.sqlite
+   php artisan migrate
+   ```
 
-5. **Seed database dengan data menu:**
-\\\ash
-php artisan db:seed --class=MenuSeeder
-\\\
+5. **Seed database:**
+   ```bash
+   php artisan db:seed --class=MenuSeeder
+   ```
 
-6. **Jalankan development server:**
-\\\ash
-php artisan serve
-\\\
+6. **Jalankan server:**
+   ```bash
+   php artisan serve
+   ```
 
 Aplikasi akan berjalan di: **http://localhost:8000**
 
@@ -62,29 +66,29 @@ Lengkap dengan Models, Controllers, Migrations, Routes, dan Views.
 ##  API Endpoints
 
 ### Menu API
-- \GET /api/menu\ - Dapatkan semua menu items
-- \POST /api/menu\ - Buat menu item baru
-- \GET /api/menu/{id}\ - Dapatkan detail menu item
+- `GET /api/menu` - Dapatkan semua menu items
+- `POST /api/menu` - Buat menu item baru
+- `GET /api/menu/{id}` - Dapatkan detail menu item
 
 ### Order API
-- \POST /api/orders\ - Buat pemesanan baru
-- \GET /api/orders/{id}\ - Dapatkan detail pemesanan
-- \GET /api/orders\ - Dapatkan semua pemesanan
-- \PUT /api/orders/{id}\ - Update status pemesanan
+- `POST /api/orders` - Buat pemesanan baru
+- `GET /api/orders/{id}` - Dapatkan detail pemesanan
+- `GET /api/orders` - Dapatkan semua pemesanan
+- `PUT /api/orders/{id}` - Update status pemesanan
 
 ### Reservation API
-- \POST /api/reservations\ - Buat booking meja baru
-- \GET /api/reservations/{id}\ - Dapatkan detail booking
-- \GET /api/reservations\ - Dapatkan semua bookings
-- \PUT /api/reservations/{id}\ - Update booking
-- \DELETE /api/reservations/{id}\ - Hapus booking
+- `POST /api/reservations` - Buat booking meja baru
+- `GET /api/reservations/{id}` - Dapatkan detail booking
+- `GET /api/reservations` - Dapatkan semua bookings
+- `PUT /api/reservations/{id}` - Update booking
+- `DELETE /api/reservations/{id}` - Hapus booking
 
 ##  Routes Web
 
-- \GET /\ - Homepage
-- \GET /menu\ - Halaman menu
-- \GET /order/create\ - Halaman checkout
-- \GET /reservation\ - Halaman booking meja
+- `GET /` - Homepage
+- `GET /menu` - Halaman menu
+- `GET /order/create` - Halaman checkout
+- `GET /reservation` - Halaman booking meja
 
 ##  Technologies Used
 
@@ -112,12 +116,11 @@ Lengkap dengan Models, Controllers, Migrations, Routes, dan Views.
 
 ---
 
-**Aplikasi siap digunakan! **
+**Aplikasi siap digunakan!**
 
 Untuk menjalankan server:
-\\\ash
-cd c:\Users\sudar\Downloads\resto-kemang-laravel
+```bash
 php artisan serve
-\\\
+```
 
 Buka browser ke: **http://localhost:8000**

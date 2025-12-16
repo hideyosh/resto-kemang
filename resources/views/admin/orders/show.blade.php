@@ -86,9 +86,37 @@
                             <label for="status">Status</label>
                             <select name="status" id="status" class="form-control">
                                 <option value="pending" @selected($order->status === 'pending')>Pending</option>
-                                <option value="processing" @selected($order->status === 'processing')>Processing</option>
+                                <option value="processing" @selected($order->status === 'processing')>Confirmed</option>
                                 <option value="completed" @selected($order->status === 'completed')>Completed</option>
                                 <option value="cancelled" @selected($order->status === 'cancelled')>Cancelled</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Update Status</button>
+                        <a href="{{ route('admin.orders.index') }}" class="btn btn-default float-right">Kembali</a>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card -->
+            <!-- Status Update -->
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Ubah Status Payment</h3>
+                </div>
+                <!-- /.card-header -->
+                <form method="POST" action="{{ route('admin.orders.update-payment-status', $order->id) }}">
+                    @csrf
+                    @method('PUT')
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="payment_status">Status Payment</label>
+                            <select name="payment_status" id="payment_status" class="form-control">
+                                <option value="pending" @selected($order->payment_status === 'pending')>Pending</option>
+                                <option value="processing" @selected($order->payment_status === 'processing')>Confirmed</option>
+                                <option value="completed" @selected($order->payment_status === 'completed')>Completed</option>
+                                <option value="cancelled" @selected($order->payment_status === 'cancelled')>Cancelled</option>
                             </select>
                         </div>
                     </div>
