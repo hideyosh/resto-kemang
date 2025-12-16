@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -82,8 +83,14 @@ class AuthController extends Controller
             'name'     => $validated['name'],
             'email'    => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'role'     => 'user',  // Default role adalah user
+            'role'     => 'customer',  // Default role adalah customer
         ]);
+
+        if ($user) {
+            Customer::create([
+                'user_id' => $user->id,
+            ]);
+        }
 
         // Login otomatis setelah register
         Auth::login($user);

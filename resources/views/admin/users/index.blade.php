@@ -32,6 +32,22 @@
                 </a>
             </div>
 
+            <form method="GET" action="{{ route('admin.users.index') }}" class="mb-4">
+                <select name="role"
+                    class="px-4 py-2 border border-gray-300 rounded-lg text-black
+               focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    onchange="this.form.submit()">
+                    <option value="">Semua Role</option>
+                    <option value="admin" {{ request('role') === 'admin' ? 'selected' : '' }}>
+                        Admin
+                    </option>
+                    <option value="customer" {{ request('role') === 'customer' ? 'selected' : '' }}>
+                        Customer
+                    </option>
+                </select>
+            </form>
+
+
             <!-- Success Message -->
             @if (session('success'))
                 <div class="bg-green-100 border border-green-400 text-black px-4 py-3 rounded mb-4 font-bold">
@@ -54,6 +70,7 @@
                             <th class="px-6 py-3 text-left text-sm font-bold text-black">No</th>
                             <th class="px-6 py-3 text-left text-sm font-bold text-black">Nama</th>
                             <th class="px-6 py-3 text-left text-sm font-bold text-black">Email</th>
+                            <th class="px-6 py-3 text-left text-sm font-bold text-black">Role</th>
                             <th class="px-6 py-3 text-left text-sm font-bold text-black">Dibuat</th>
                             <th class="px-6 py-3 text-center text-sm font-bold text-black">Aksi</th>
                         </tr>
@@ -70,12 +87,15 @@
                                 <td class="px-6 py-3 text-black">
                                     {{ $user->email }}
                                 </td>
+                                <td class="px-6 py-3 text-black">
+                                    {{ $user->role }}
+                                </td>
                                 <td class="px-6 py-3 text-sm text-black">
                                     {{ $user->created_at->format('d-m-Y') }}
                                 </td>
                                 <td class="px-6 py-3 text-center">
                                     <a href="{{ route('admin.users.edit', $user->id) }}"
-                                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition font-bold">
+                                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded text-sm transition font-bold mr-2">
                                         Edit
                                     </a>
                                     <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}"

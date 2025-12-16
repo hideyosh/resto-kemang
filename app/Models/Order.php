@@ -9,15 +9,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Order extends Model
 {
     protected $fillable = [
-        'customer_name',
-        'customer_email',
-        'customer_phone',
         'items',
         'total_price',
         'status',
         'payment_status',
         'notes',
-        'user_id',
+        'user_id'
     ];
 
     protected $casts = [

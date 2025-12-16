@@ -14,7 +14,7 @@
                 <div class="p-4 bg-gray-800 rounded-lg">
                     <div class="flex justify-between items-center">
                         <div>
-                            <div class="text-sm text-gray-400">Reservation #{{ $r->id }}</div>
+                            <div class="text-sm text-gray-400">Reservation {{ $r->user->name }}</div>
                             <div class="text-lg font-bold">{{ $r->reservation_date->format('Y-m-d H:i') }}</div>
                         </div>
                         <a href="/reservations/{{ $r->id }}" class="text-yellow-400 font-semibold">View</a>

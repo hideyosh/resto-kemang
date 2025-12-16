@@ -24,14 +24,6 @@ class DatabaseSeeder extends Seeder
             'role'     => 'admin',
         ]);
 
-        // Buat akun user untuk testing
-        User::create([
-            'name'     => 'Test User',
-            'email'    => 'user@example.com',
-            'password' => Hash::make('password'),
-            'role'     => 'customer',
-        ]);
-
         // Jalankan seeder lainnya
         $this->call([
             MenuSeeder::class,

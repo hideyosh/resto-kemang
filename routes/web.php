@@ -5,6 +5,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // ============================================
@@ -45,7 +46,9 @@ Route::middleware(['auth', 'user'])->group(function () {
 
     // Reservation routes
     Route::get('/reservation', function () {
-        return view('reservation.create');
+        return view('reservation.create', [
+            'user' => auth()->user(),
+        ]);
     })->name('reservation.create');
     Route::post('/api/reservations', [ReservationController::class, 'store'])->name('reservation.store');
 
@@ -53,6 +56,10 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/reservations', [ReservationController::class, 'userIndex'])->name('reservations.index');
     // User: lihat detail reservasi milik sendiri
     Route::get('/reservations/{reservation}', [ReservationController::class, 'userShow'])->name('reservations.show');
+
+    // Profile routes
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 // ============================================

@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             // Link to users table instead of storing customer contact fields directly
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->json('items');
             $table->integer('total_price');
             $table->enum('status', ['pending', 'processing', 'completed', 'cancelled'])->default('pending');

@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('table_reservations', function (Blueprint $table) {
             $table->id();
             // Link to users table instead of storing customer contact fields directly
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->integer('number_of_guests');
             $table->dateTime('reservation_date');
             $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');

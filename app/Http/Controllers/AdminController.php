@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\User;
 use App\Models\MenuItem;
 use App\Models\Order;
@@ -41,10 +42,14 @@ class AdminController extends Controller
     // ============================================
 
     // Tampilkan daftar semua user
-    public function userIndex()
+    public function userIndex(Request $request)
     {
         // Ambil semua user dengan role 'user'
-        $users = User::where('role', 'customer')->paginate(10);
+        // $users = User::paginate(10);
+        $users = User::when($request->input('role'), function ($query, $role) {
+            $query->where('role', $role);
+        })->paginate()->withQueryString();
+
 
         return view('admin.users.index', [
             'users' => $users,
@@ -65,15 +70,22 @@ class AdminController extends Controller
             'name'     => 'required|string|max:255',
             'email'    => 'required|email|unique:users',
             'password' => 'required|min:8|confirmed',
+            'role' => 'required|in:admin,customer'
         ]);
 
         // Buat user baru dengan role 'user'
-        User::create([
+        $user = User::create([
             'name'     => $validated['name'],
             'email'    => $validated['email'],
             'password' => bcrypt($validated['password']),
-            'role'     => 'user',
+            'role'     => $validated['role']
         ]);
+
+        if ($validated['role'] === 'customer') {
+            Customer::create([
+                'user_id' =>$user->id
+            ]);
+        }
 
         return redirect()->route('admin.users.index')
             ->with('success', 'User berhasil ditambahkan!');
@@ -101,11 +113,13 @@ class AdminController extends Controller
             'name'     => 'required|string|max:255',
             'email'    => 'required|email|unique:users,email,' . $id,
             'password' => 'nullable|min:8|confirmed',
+            'role' => 'in:admin, customer'
         ]);
 
         // Update nama dan email
         $user->name = $validated['name'];
         $user->email = $validated['email'];
+        $user->role = $validated['role'];
 
         // Update password jika diisi
         if (!empty($validated['password'])) {

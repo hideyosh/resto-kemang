@@ -69,4 +69,5 @@
 @endsection
 
 @section('scripts')
+{{-- ada pada order.js --}}
 @endsection

@@ -24,7 +24,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-sm font-medium mb-2">Phone Number *</label>
-                        <input type="tel" name="customer_phone" required class="w-full bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                        <input type="tel" disabled value="{{ $user->customer->phone }}" required class="w-full bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
                     </div>
 
                     <div>
@@ -74,5 +74,5 @@
 @endsection
 
 @section('scripts')
-<!-- Reservation page scripts are handled by resources/js/modules/reservation.js -->
+{{-- ada pada reservations js --}}
 @endsection
