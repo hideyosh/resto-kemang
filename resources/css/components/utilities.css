@@ -2,11 +2,11 @@
  * Global Utilities
  */
 .notification {
-    @apply fixed top-20 right-6 bg-yellow-400 text-black px-6 py-3 rounded-lg shadow-lg animate-pulse;
+    @apply fixed top-20 right-6 bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg animate-pulse;
 }
 
 .btn-primary {
-    @apply bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 rounded-lg transition;
+    @apply bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg transition;
 }
 
 .btn-secondary {
@@ -14,7 +14,7 @@
 }
 
 .form-input {
-    @apply w-full bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500;
+    @apply w-full bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600;
 }
 
 .card {
@@ -22,5 +22,5 @@
 }
 
 .badge {
-    @apply inline-block bg-yellow-500 text-black px-3 py-1 rounded-full text-xs font-bold;
+    @apply inline-block bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold;
 }

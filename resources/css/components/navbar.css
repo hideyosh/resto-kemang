@@ -10,7 +10,7 @@ header nav {
 }
 
 header nav a {
-    @apply hover:text-yellow-400 transition;
+    @apply hover:text-red-500 transition;
 }
 
 #mobile-menu {

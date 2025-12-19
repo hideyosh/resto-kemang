@@ -29,10 +29,10 @@ function setupFilterButtons() {
 
                 // Update active button - simple loop
                 for (var j = 0; j < filterButtons.length; j++) {
-                    filterButtons[j].classList.remove('bg-yellow-500');
+                    filterButtons[j].classList.remove('bg-red-600');
                     filterButtons[j].classList.add('bg-gray-700');
                 }
-                button.classList.add('bg-yellow-500');
+                button.classList.add('bg-red-600');
                 button.classList.remove('bg-gray-700');
 
                 // Show/hide menu items
@@ -149,7 +149,7 @@ function renderCart() {
         var cartItem = document.createElement('div');
         cartItem.className = 'bg-gray-800 p-4 rounded-lg mb-3 flex justify-between items-start';
         cartItem.innerHTML = '<div class="flex-1"><h4 class="font-bold">' + item.name + '</h4>' +
-            '<p class="text-yellow-400">Rp ' + item.price.toLocaleString('id-ID') + '</p>' +
+            '<p class="text-red-500">Rp ' + item.price.toLocaleString('id-ID') + '</p>' +
             '<div class="flex items-center gap-2 mt-2">' +
             '<button onclick="decrementQuantity(' + i + ')" class="bg-gray-700 px-2 py-1 rounded">−</button>' +
             '<span class="text-sm">' + item.quantity + 'x</span>' +
@@ -165,7 +165,7 @@ function renderCart() {
 /**
  * Remove item from cart
  */
-window.removeFromCart = function(index) {
+window.removeFromCart = function (index) {
     const cart = getCart();
     cart.splice(index, 1);
     saveCart(cart);
@@ -175,7 +175,7 @@ window.removeFromCart = function(index) {
 /**
  * Increment item quantity
  */
-window.incrementQuantity = function(index) {
+window.incrementQuantity = function (index) {
     const cart = getCart();
     if (cart[index]) {
         cart[index].quantity++;
@@ -187,7 +187,7 @@ window.incrementQuantity = function(index) {
 /**
  * Decrement item quantity
  */
-window.decrementQuantity = function(index) {
+window.decrementQuantity = function (index) {
     const cart = getCart();
     if (cart[index] && cart[index].quantity > 1) {
         cart[index].quantity--;
@@ -204,7 +204,7 @@ function toast(message, type) {
     var notification = document.createElement('div');
     var cls = 'bg-gray-200 text-black';
     if (type === 'success') cls = 'bg-green-500 text-white';
-    if (type === 'warning') cls = 'bg-yellow-400 text-black';
+    if (type === 'warning') cls = 'bg-red-400 text-white';
     if (type === 'error') cls = 'bg-red-500 text-white';
     notification.className = 'fixed top-20 right-6 px-6 py-3 rounded-lg shadow-lg ' + cls;
     notification.textContent = message;

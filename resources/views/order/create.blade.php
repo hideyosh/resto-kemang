@@ -56,8 +56,8 @@
 
                     <button
                         type="submit"
-                        class="w-full bg-yellow-500 hover:bg-yellow-600
-                               text-black font-bold py-3 rounded-lg transition"
+                        class="w-full bg-red-500 hover:bg-red-600
+                               text-white font-bold py-3 rounded-lg transition"
                     >
                         Place Order
                     </button>

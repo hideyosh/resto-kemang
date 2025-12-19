@@ -2,7 +2,7 @@
  * Menu Page Styles
  */
 .filter-button {
-    @apply px-6 py-2 rounded-lg font-bold transition;
+    @apply px-6 py-2 rounded-lg font-bold transition hover:opacity-90;
 }
 
 .menu-item {

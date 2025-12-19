@@ -13,7 +13,7 @@
 
         <!-- Filter Buttons -->
         <div class="flex flex-wrap justify-center gap-3 mb-12">
-            <button class="filter-button bg-yellow-500 text-black px-6 py-2 rounded-lg font-bold" data-filter="all">
+            <button class="filter-button bg-red-600 text-white px-6 py-2 rounded-lg font-bold" data-filter="all">
                 All
             </button>
             <button class="filter-button bg-gray-700 text-white px-6 py-2 rounded-lg font-bold" data-filter="sushi">
@@ -39,7 +39,7 @@
                     <img src="{{ asset('img/' . $menu->image) }}" alt="{{ $menu->name }}" class="w-full h-full object-cover">
                 </div>
                 @else
-                <div class="h-48 bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center">
+                <div class="h-48 bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
                     <span class="text-3xl">🍜</span>
                 </div>
                 @endif
@@ -49,13 +49,13 @@
                     <p class="text-gray-400 text-sm mb-4">{{ $menu->description ?? 'Premium Japanese cuisine' }}</p>
 
                     <div class="flex justify-between items-center mb-4">
-                        <span class="text-2xl font-bold text-yellow-400">Rp {{ number_format($menu->price, 0, ',', '.') }}</span>
-                        <span class="text-xs bg-yellow-500 text-black px-3 py-1 rounded-full">{{ ucfirst($menu->category) }}</span>
+                        <span class="text-2xl font-bold text-red-500">Rp {{ number_format($menu->price, 0, ',', '.') }}</span>
+                        <span class="text-xs bg-red-600 text-white px-3 py-1 rounded-full">{{ ucfirst($menu->category) }}</span>
                     </div>
 
                     @auth
                         <button
-                            class="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 rounded-lg transition"
+                            class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-lg transition"
                             data-name="{{ $menu->name }}"
                             data-price="{{ $menu->price }}"
                             data-image="{{ $menu->image }}"
@@ -65,7 +65,7 @@
                         </button>
                     @else
                         <button
-                            class="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 rounded-lg transition"
+                            class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-lg transition"
                             onclick="window.location.href='{{ route('login') }}'"
                         >
                             Order
@@ -100,7 +100,7 @@
                 <span>Total:</span>
                 <span id="cartTotal">Rp 0</span>
             </div>
-            <button id="checkoutButton" class="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 rounded-lg">
+            <button id="checkoutButton" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg">
                 Checkout
             </button>
         </div>
@@ -108,7 +108,7 @@
 </div>
 
 <!-- Cart Toggle Button -->
-<button id="toggleCartButton" class="fixed bottom-6 right-6 bg-yellow-500 hover:bg-yellow-600 text-black w-16 h-16 rounded-full flex items-center justify-center text-2xl shadow-lg">
+<button id="toggleCartButton" class="fixed bottom-6 right-6 bg-red-600 hover:bg-red-700 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl shadow-lg">
     🛒
 </button>
 @endauth
@@ -216,13 +216,13 @@ const menuItems = document.querySelectorAll('.menu-item');
 
 function applyFilter(filter) {
     filterButtons.forEach(btn => {
-        btn.classList.remove('bg-yellow-500');
+        btn.classList.remove('bg-red-600');
         btn.classList.add('bg-gray-700');
     });
 
     const activeButton = document.querySelector(`.filter-button[data-filter="${filter}"]`);
     if (activeButton) {
-        activeButton.classList.add('bg-yellow-500');
+        activeButton.classList.add('bg-red-600');
         activeButton.classList.remove('bg-gray-700');
     }
 

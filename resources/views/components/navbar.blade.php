@@ -4,7 +4,7 @@
         <!-- Logo -->
         <a href="/" class="flex items-center gap-2">
             <h2 class="text-3xl font-bold">
-                Resto<span class="text-yellow-400">Kemang</span>
+                Ryori<span class="text-red-500">Nosekai</span>
             </h2>
         </a>
 
@@ -12,9 +12,9 @@
         <div class="hidden md:flex items-center gap-8 font-bold text-sm">
 
             <nav class="flex gap-6">
-                <a href="/" class="hover:text-yellow-400 transition">HOME</a>
-                <a href="/menu" class="hover:text-yellow-400 transition">MENU</a>
-                <a href="/reservation" class="hover:text-yellow-400 transition">BOOKING</a>
+                <a href="/" class="hover:text-red-500 transition">HOME</a>
+                <a href="/menu" class="hover:text-red-500 transition">MENU</a>
+                <a href="/reservation" class="hover:text-red-500 transition">BOOKING</a>
             </nav>
 
             <!-- Login & Register / User Dropdown -->
@@ -23,7 +23,7 @@
                     <!-- User Dropdown -->
                     <div class="relative">
                         <button id="user-dropdown-btn"
-                            class="flex items-center gap-2 bg-yellow-400 text-black px-4 py-2 rounded-lg font-bold hover:bg-yellow-300 transition">
+                            class="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-red-500 transition">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path
                                     d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
@@ -35,7 +35,7 @@
                         <div id="user-dropdown-menu"
                             class="absolute right-0 mt-2 w-48 bg-black/95 rounded-lg shadow-lg hidden flex-col py-2 z-50">
                             <a href="/profile"
-                                class="px-4 py-2 hover:bg-yellow-400 hover:text-black transition flex items-center gap-2">
+                                class="px-4 py-2 hover:bg-red-600 hover:text-white transition flex items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -45,7 +45,7 @@
                             </a>
 
                             <a href="/orders"
-                                class="px-4 py-2 hover:bg-yellow-400 hover:text-black transition flex items-center gap-2">
+                                class="px-4 py-2 hover:bg-red-600 hover:text-white transition flex items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -55,7 +55,7 @@
                             </a>
 
                             <a href="/reservations"
-                                class="px-4 py-2 hover:bg-yellow-400 hover:text-black transition flex items-center gap-2">
+                                class="px-4 py-2 hover:bg-red-600 hover:text-white transition flex items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -65,7 +65,7 @@
                             </a>
 
                             <form method="POST" action="/logout"
-                                class="px-4 py-2 hover:bg-yellow-400 hover:text-black transition">
+                                class="px-4 py-2 hover:bg-red-600 hover:text-white transition">
                                 @csrf
                                 <button type="submit" class="w-full text-left flex items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
@@ -85,7 +85,7 @@
                     </a>
 
                     <a href="/register"
-                        class="bg-yellow-400 text-black px-5 py-2 rounded-lg font-bold hover:bg-yellow-300 hover:text-black transition">
+                        class="bg-red-600 text-white px-5 py-2 rounded-lg font-bold hover:bg-red-700 hover:text-white transition">
                         Register
                     </a>
                 @endauth
@@ -104,13 +104,13 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="absolute top-full left-0 right-0 bg-black/95 md:hidden hidden w-full">
 
-            <nav class="flex flex-col gap-0 w-full border-b border-yellow-400/20">
+            <nav class="flex flex-col gap-0 w-full border-b border-red-600/20">
                 <a href="/"
-                    class="block py-3 px-4 hover:bg-yellow-400 hover:text-black transition border-b border-yellow-400/20">HOME</a>
+                    class="block py-3 px-4 hover:bg-red-600 hover:text-white transition border-b border-red-600/20">HOME</a>
                 <a href="/menu"
-                    class="block py-3 px-4 hover:bg-yellow-400 hover:text-black transition border-b border-yellow-400/20">MENU</a>
+                    class="block py-3 px-4 hover:bg-red-600 hover:text-white transition border-b border-red-600/20">MENU</a>
                 <a href="/reservation"
-                    class="block py-3 px-4 hover:bg-yellow-400 hover:text-black transition">BOOKING</a>
+                    class="block py-3 px-4 hover:bg-red-600 hover:text-white transition">BOOKING</a>
             </nav>
 
             <!-- Login & Register Mobile / User Dropdown Mobile -->
@@ -118,7 +118,7 @@
                 @auth
                     <!-- User Mobile Dropdown -->
                     <button id="mobile-user-dropdown-btn"
-                        class="w-full flex items-center justify-between gap-2 bg-yellow-400 text-black px-4 py-3 rounded-lg font-bold hover:bg-yellow-300 transition mb-2">
+                        class="w-full flex items-center justify-between gap-2 bg-red-600 text-white px-4 py-3 rounded-lg font-bold hover:bg-red-500 transition mb-2">
                         <div class="flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path
@@ -137,7 +137,7 @@
                     <div id="mobile-user-dropdown-menu"
                         class="hidden flex-col gap-0 bg-black/50 rounded-lg overflow-hidden mb-2">
                         <a href="/profile"
-                            class="block py-3 px-4 hover:bg-yellow-400 hover:text-black transition flex items-center gap-2 border-b border-yellow-400/20">
+                            class="block py-3 px-4 hover:bg-red-600 hover:text-white transition flex items-center gap-2 border-b border-red-600/20">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -147,7 +147,7 @@
                         </a>
 
                         <a href="/orders"
-                            class="block py-3 px-4 hover:bg-yellow-400 hover:text-black transition flex items-center gap-2 border-b border-yellow-400/20">
+                            class="block py-3 px-4 hover:bg-red-600 hover:text-white transition flex items-center gap-2 border-b border-red-600/20">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -157,7 +157,7 @@
                         </a>
 
                         <a href="/reservations"
-                            class="block py-3 px-4 hover:bg-yellow-400 hover:text-black transition flex items-center gap-2 border-b border-yellow-400/20">
+                            class="block py-3 px-4 hover:bg-red-600 hover:text-white transition flex items-center gap-2 border-b border-red-600/20">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -169,7 +169,7 @@
                         <form method="POST" action="/logout">
                             @csrf
                             <button type="submit"
-                                class="w-full text-left py-3 px-4 hover:bg-yellow-400 hover:text-black transition flex items-center gap-2">
+                                class="w-full text-left py-3 px-4 hover:bg-red-600 hover:text-white transition flex items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -186,7 +186,7 @@
                     </a>
 
                     <a href="/register"
-                        class="block bg-yellow-400 text-black px-4 py-3 rounded-lg font-bold w-full text-center hover:bg-yellow-300 transition">
+                        class="block bg-red-600 text-white px-4 py-3 rounded-lg font-bold w-full text-center hover:bg-red-500 transition">
                         Register
                     </a>
                 @endauth

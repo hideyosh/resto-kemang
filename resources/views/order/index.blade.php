@@ -17,7 +17,7 @@
                             <div class="text-sm text-gray-400">Order #{{ $order->id }}</div>
                             <div class="text-lg font-bold">Rp {{ number_format($order->total_price, 0, ',', '.') }}</div>
                         </div>
-                        <a href="/orders/{{ $order->id }}" class="text-yellow-400 font-semibold">View</a>
+                        <a href="/orders/{{ $order->id }}" class="text-red-500 font-semibold">View</a>
                     </div>
                 </div>
             @endforeach

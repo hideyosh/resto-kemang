@@ -1,23 +1,23 @@
 @extends('layouts.app')
 
-@section('title', 'Resto Kemang - Authentic Japanese Cuisine')
+@section('title', 'RyoriNosekai - Authentic Japanese Cuisine')
 
 @section('content')
 <!-- Hero Section -->
 <section id="home" class="relative bg-no-repeat bg-cover bg-center min-h-screen flex items-center justify-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset('img/sushidone.jpg') }}');">
     <div class="text-center px-4">
         <h1 class="text-6xl md:text-8xl font-bold mb-6 leading-tight">
-            RESTO<br>KEMANG
+            Ryori<br>Nosekai
         </h1>
         <p class="text-xl md:text-2xl mb-8 text-gray-300">
             Experience Authentic Japanese Cuisine
         </p>
         @if (Auth::check())
-            <a href="/menu" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-4 rounded-lg font-bold text-lg transition">
+            <a href="/menu" class="inline-block bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition">
                 Order Now
             </a>
         @else
-            <a href="/login" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-4 rounded-lg font-bold text-lg transition">
+            <a href="/login" class="inline-block bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition">
                 Order Now
             </a>
         @endif
@@ -25,7 +25,7 @@
 </section>
 
 <!-- About Section -->
-<section class="bg-yellow-400 text-gray-900 py-16 px-4">
+<section class="bg-red-600 text-white py-16 px-4">
     <div class="max-w-7xl mx-auto">
         <div class="text-center mb-12">
             <h2 class="text-4xl md:text-5xl font-bold mb-4">About Us</h2>
@@ -44,7 +44,7 @@
         </div>
 
         <p class="text-lg md:text-xl max-w-4xl mx-auto text-center mb-12 leading-relaxed">
-            Welcome to Resto Kemang, where the art of Japanese cuisine comes alive in every dish. Indulge in the finest sushi, made with fresh, premium ingredients, savor the comforting flavors of hearty ramen with rich, authentic broths, and experience the melt-in-your-mouth perfection of premium wagyu beef.
+            Welcome to RyoriNosekai, where the art of Japanese cuisine comes alive in every dish. Indulge in the finest sushi, made with fresh, premium ingredients, savor the comforting flavors of hearty ramen with rich, authentic broths, and experience the melt-in-your-mouth perfection of premium wagyu beef.
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -106,14 +106,14 @@
         </p>
         <div class="flex flex-col md:flex-row gap-4 justify-center">
             @if (Auth::check())
-                <a href="/menu" class="bg-black text-yellow-400 px-8 py-3 rounded-lg font-bold hover:bg-gray-800 transition">
+                <a href="/menu" class="bg-black text-red-500 px-8 py-3 rounded-lg font-bold hover:bg-gray-800 transition">
                     Browse Menu
                 </a>
                 <a href="/reservation" class="bg-gray-900 text-white px-8 py-3 rounded-lg font-bold hover:bg-gray-700 transition">
                     Book a Table
                 </a>
             @else
-                <a href="/login" class="bg-black text-yellow-400 px-8 py-3 rounded-lg font-bold hover:bg-gray-800 transition">
+                <a href="/login" class="bg-black text-red-500 px-8 py-3 rounded-lg font-bold hover:bg-gray-800 transition">
                     Browse Menu
                 </a>
                 <a href="/login" class="bg-gray-900 text-white px-8 py-3 rounded-lg font-bold hover:bg-gray-700 transition">

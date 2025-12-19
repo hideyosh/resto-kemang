@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-gradient-to-br from-orange-50 to-red-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+<div class="min-h-screen bg-gradient-to-br from-red-50 to-red-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-8">
 
         <!-- Header -->
         <div class="text-center mb-8">
             <h2 class="text-3xl font-bold text-gray-900 mb-2">Join Us</h2>
-            <p class="text-gray-600">Create your Resto Kemang account</p>
+            <p class="text-gray-600">Create your RyoriNosekai account</p>
         </div>
 
         <!-- Form -->
@@ -24,7 +24,7 @@
                     value="{{ old('name') }}"
                     autocomplete="name"
                     class="w-full bg-white text-gray-900 px-4 py-3 border-2 border-gray-300 rounded-lg
-                           focus:outline-none focus:border-orange-500 transition
+                           focus:outline-none focus:border-red-600 transition
                            @error('name') border-red-500 @enderror"
                     placeholder="John Doe"
                     required
@@ -44,7 +44,7 @@
                     value="{{ old('email') }}"
                     autocomplete="email"
                     class="w-full bg-white text-gray-900 px-4 py-3 border-2 border-gray-300 rounded-lg
-                           focus:outline-none focus:border-orange-500 transition
+                           focus:outline-none focus:border-red-600 transition
                            @error('email') border-red-500 @enderror"
                     placeholder="you@example.com"
                     required
@@ -63,7 +63,7 @@
                     id="password"
                     autocomplete="new-password"
                     class="w-full bg-white text-gray-900 px-4 py-3 border-2 border-gray-300 rounded-lg
-                           focus:outline-none focus:border-orange-500 transition
+                           focus:outline-none focus:border-red-600 transition
                            @error('password') border-red-500 @enderror"
                     placeholder="Minimum 8 characters"
                     required
@@ -82,7 +82,7 @@
                     id="password_confirmation"
                     autocomplete="new-password"
                     class="w-full bg-white text-gray-900 px-4 py-3 border-2 border-gray-300 rounded-lg
-                           focus:outline-none focus:border-orange-500 transition"
+                           focus:outline-none focus:border-red-600 transition"
                     placeholder="Confirm password"
                     required
                 >
@@ -91,7 +91,7 @@
             <!-- Submit Button -->
             <button
                 type="submit"
-                class="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-3 rounded-lg
+                class="w-full bg-gradient-to-r from-red-600 to-red-800 text-white font-semibold py-3 rounded-lg
                        hover:shadow-lg transition transform hover:scale-105 duration-200"
             >
                 Create Account
@@ -110,7 +110,7 @@
 
         <!-- Login Link -->
         <div class="mt-6 text-center">
-            <a href="{{ route('login') }}" class="font-medium text-orange-500 hover:text-orange-600">
+            <a href="{{ route('login') }}" class="font-medium text-red-600 hover:text-red-700">
                 Sign in instead
             </a>
         </div>
@@ -119,7 +119,7 @@
         <div class="mt-8 text-center">
             <img
                 src="{{ asset('img/sushidone.jpg') }}"
-                alt="Resto Kemang"
+                alt="RyoriNosekai"
                 class="rounded-lg w-full h-32 object-cover opacity-70 hover:opacity-100 transition"
             >
         </div>

@@ -17,7 +17,7 @@
                             <div class="text-sm text-gray-400">Reservation {{ $r->user->name }}</div>
                             <div class="text-lg font-bold">{{ $r->reservation_date->format('Y-m-d H:i') }}</div>
                         </div>
-                        <a href="/reservations/{{ $r->id }}" class="text-yellow-400 font-semibold">View</a>
+                        <a href="/reservations/{{ $r->id }}" class="text-red-500 font-semibold">View</a>
                     </div>
                 </div>
             @endforeach
