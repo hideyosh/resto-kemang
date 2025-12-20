@@ -105,16 +105,6 @@ Lengkap dengan Models, Controllers, Migrations, Routes, dan Views.
 - 8 menu items default data
 - Proper relationships dan validations
 
-##  Team (Kelompok 6)
-
-- Aditya Nur Lintang (4523210003)
-- Athalla Safriali (4523210022)
-- Alip Khoeril Akbar (4523210009)
-- Andra Teguh (4523210017)
-- Waode Fairuzh Ramadhani Somandeno (4523210111)
-- Atika Dian Azzahra (4523210024)
-
----
 
 **Aplikasi siap digunakan!**
 

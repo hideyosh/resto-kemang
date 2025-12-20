@@ -34,9 +34,18 @@
             <div>
                 <h4 class="font-bold text-lg mb-4">Contact Us</h4>
                 <ul class="space-y-2 text-gray-400">
-                    <li>📞 +62 (0)21 2850 3950</li>
-                    <li>📧 info@restokemang.id</li>
-                    <li>📍 Kemang, Jakarta Selatan</li>
+                    <li>
+                        <i class="bi bi-telephone-fill"></i>
+                        +62 (0)21 2850 3950
+                    </li>
+                    <li>
+                        <i class="bi bi-envelope-fill"></i>
+                        info@restokemang.id
+                    </li>
+                    <li>
+                        <i class="bi bi-geo-alt-fill"></i>
+                        Kemang, Jakarta Selatan
+                    </li>
                 </ul>
             </div>
         </div>
@@ -44,16 +53,15 @@
         <!-- Social Media -->
         <div class="border-t border-gray-700 pt-8">
             <div class="flex justify-center gap-6 mb-6">
-                <a href="#" class="text-gray-400 hover:text-red-500 transition text-2xl">f</a>
-                <a href="#" class="text-gray-400 hover:text-red-500 transition text-2xl">𝕏</a>
-                <a href="#" class="text-gray-400 hover:text-red-500 transition text-2xl">📷</a>
-                <a href="#" class="text-gray-400 hover:text-red-500 transition text-2xl">▶</a>
+                <a href="#" class="text-gray-400 hover:text-red-500 transition text-2xl"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-gray-400 hover:text-red-500 transition text-2xl"><i class="bi bi-twitter-x"></i></a>
+                <a href="#" class="text-gray-400 hover:text-red-500 transition text-2xl"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="text-gray-400 hover:text-red-500 transition text-2xl"><i class="bi bi-youtube"></i></a>
             </div>
 
             <!-- Copyright -->
             <div class="text-center text-gray-500 text-sm">
                 <p>&copy; 2025 RyoriNosekai. All rights reserved.</p>
-                <p class="mt-2">Crafted with ❤️ by Kelompok 6</p>
             </div>
         </div>
     </div>
