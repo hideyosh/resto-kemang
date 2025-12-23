@@ -186,7 +186,7 @@ class AdminController extends Controller
 
         // Validasi status
         $validated = $request->validate([
-            'status' => 'required|in:pending,confirmed,preparing,ready,completed,cancelled',
+            'status' => 'required|in:pending,processing,completed,cancelled',
         ]);
 
         // Update status order
@@ -196,6 +196,25 @@ class AdminController extends Controller
         return redirect()->back()
             ->with('success', 'Status order berhasil diupdate!');
     }
+
+    // Update status payment order
+    public function orderUpdatePaymentStatus(Request $request, $id)
+    {
+        // Cari order berdasarkan ID
+        $order = Order::findOrFail($id);
+
+        // Validasi status
+        $validated = $request->validate([
+            'payment_status' => 'required|in:unpaid,paid,refunded',
+        ]);
+
+        // Update status order
+        $order->payment_status = $validated['payment_status'];
+        $order->save();
+
+        return redirect()->back()
+            ->with('success', 'Status payment order berhasil diupdate!');
+    }   
 
     // ============================================
     // RESERVATIONS - Kelola reservasi

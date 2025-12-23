@@ -86,7 +86,7 @@
                             <label for="status">Status</label>
                             <select name="status" id="status" class="form-control">
                                 <option value="pending" @selected($order->status === 'pending')>Pending</option>
-                                <option value="processing" @selected($order->status === 'processing')>Confirmed</option>
+                                <option value="processing" @selected($order->status === 'processing')>Processing</option>
                                 <option value="completed" @selected($order->status === 'completed')>Completed</option>
                                 <option value="cancelled" @selected($order->status === 'cancelled')>Cancelled</option>
                             </select>
@@ -113,10 +113,9 @@
                         <div class="form-group">
                             <label for="payment_status">Status Payment</label>
                             <select name="payment_status" id="payment_status" class="form-control">
-                                <option value="pending" @selected($order->payment_status === 'pending')>Pending</option>
-                                <option value="processing" @selected($order->payment_status === 'processing')>Confirmed</option>
-                                <option value="completed" @selected($order->payment_status === 'completed')>Completed</option>
-                                <option value="cancelled" @selected($order->payment_status === 'cancelled')>Cancelled</option>
+                                <option value="unpaid" @selected($order->payment_status === 'unpaid')>Unpaid</o ption>
+                                <option value="paid" @selected($order->payment_status === 'paid')>Paid</option>
+                                <option value="refunded" @selected($order->payment_status === 'refunded')>Refunded</option>
                             </select>
                         </div>
                     </div>

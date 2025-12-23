@@ -85,6 +85,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::get('/', [AdminController::class, 'orderIndex'])->name('index');
         Route::get('/{order}', [AdminController::class, 'orderShow'])->name('show');
         Route::put('/{order}/status', [AdminController::class, 'orderUpdateStatus'])->name('update-status');
+        Route::put('/{order}/payment-status', [AdminController::class, 'orderUpdatePaymentStatus'])->name('update-payment-status');
     });
 
     // Reservation Management
